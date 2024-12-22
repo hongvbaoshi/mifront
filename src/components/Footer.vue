@@ -18,7 +18,7 @@
         <p>购物车</p>
         <div class="quantity" v-if="cartcount>0">{{cartcount}}</div>
       </li>
-      <li>
+      <li @click="toCustomer" class="customer">
         <i class="fa fa-user-o"></i>
         <p>我的</p>
       </li>
@@ -65,6 +65,11 @@ let toGoodsType = () => {
 let toCart = () => {
   router.push("/cart");
 };
+
+let toCustomer = () => {
+  router.push("/customer");
+};
+
 </script>
 
 <style scoped>

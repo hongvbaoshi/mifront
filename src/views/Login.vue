@@ -47,7 +47,7 @@ const login = () => {
     return;
   }
 
-  axios.get('http://localhost:7001/selectCustomerByTelIdByPass', {
+  axios.get('selectCustomerByTelIdByPass', {
    params: {
      telId: customer.value.telId, 
      password: customer.value.password 

@@ -6,6 +6,7 @@ import Login from '../views/Login.vue'
 import Cart from '../views/Cart.vue'
 import Settlement from '../views/Settlement.vue'
 import Payment from '../views/Payment.vue'
+import Customer from '@/views/Customer.vue'
 
 const routes = [
   {
@@ -40,6 +41,10 @@ const routes = [
     path: '/payment',
     name: 'Payment',
     component: Payment
+  },{
+    path: '/customer',
+    name: 'Customer',
+    component:Customer
   }
 ]
 
