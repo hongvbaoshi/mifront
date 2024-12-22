@@ -129,31 +129,35 @@ const goodsTotalPrice = computed(() => {
 //初始化
 const init = () => {
   axios
-    .post("selectAddressByTelIdByDefault", {
+  .get("selectAddressByTelIdByDefault", {
+    params: {
       telId: customer.telId,
-    })
-    .then((response) => {
-      address.value = response.data;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    }
+  })
+  .then((response) => {
+    address.value = response.data;
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 
   axios
-    .post("selectCartByTelId", {
+  .get("selectCartByTelId", {
+    params: {
       telId: customer.telId,
-    })
-    .then((response) => {
-      let arr = response.data;
-      for (let cart of arr) {
-        if (cart.state == 1) {
-          cartArr.value.push(cart);
-        }
+    }
+  })
+  .then((response) => {
+    let arr = response.data;
+    for (let cart of arr) {
+      if (cart.state == 1) {
+        cartArr.value.push(cart);
       }
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    }
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 };
 init();
 

@@ -28,6 +28,7 @@
     <section>
       <!-- 轮播 -->
       <div class="carousel">
+
         <ul ref="carousel">
           <li>
             <img src="../assets/carousel01.jpg" />
@@ -61,6 +62,7 @@
           <img src="../assets/type04.png" />
           <p>以旧换新</p>
         </li>
+        
         <li>
           <img src="../assets/type05.png" />
           <p>小米上新</p>
@@ -257,30 +259,59 @@ header .search .user i {
   font-size: 5.4vw;
   color: #767676;
 }
-
 header ul {
   width: 100%;
   height: 8.4vw;
-  background-color: #f2f2f2;
+  background-color: #f2f2f2; /* 保持背景色 */
   display: flex;
+  justify-content: center; /* 使列表项居中 */
+  align-items: center; /* 垂直居中 */
+  padding: 0 10px; /* 添加一些内边距 */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* 添加阴影效果 */
+  border-radius: 5px; /* 圆角边框 */
 }
+
 header ul li {
   height: 8.4vw;
   line-height: 8.4vw;
-
   box-sizing: border-box;
   font-size: 3.6vw;
   color: #767676;
-  margin: 0 3.5vw;
-
-  user-select: none;
+  margin: 0 1.75vw; /* 减少列表项之间的间距 */
+  padding: 0 10px; /* 添加内边距 */
+  transition: color 0.3s, background-color 0.3s; /* 过渡效果 */
+  position: relative; /* 为下边框定位做准备 */
+  white-space: nowrap; /* 防止文字换行 */
 }
+
 header ul li:first-child {
   border-bottom: solid 2px #ff6700;
   color: #ff6700;
 }
+
+header ul li:not(:first-child):after {
+  content: ''; /* 下边框 */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: transparent; /* 默认透明 */
+  transition: background-color 0.3s;
+}
+
+header ul li:not(:first-child):hover:after {
+  background-color: #ff6700; /* 鼠标悬停时显示颜色 */
+}
+
 header ul li .fa-angle-down {
   font-size: 5.6vw;
+  margin-left: 10px; /* 添加左边距 */
+  transition: color 0.3s; /* 过渡效果 */
+}
+
+header ul li:hover .fa-angle-down {
+  color: #ff6700; /* 鼠标悬停时的颜色变化 */
 }
 
 /************************* 中间内容部分 **************************/

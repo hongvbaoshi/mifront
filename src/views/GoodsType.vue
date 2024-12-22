@@ -54,31 +54,35 @@ const goodsArr = ref([]);
 const goodsType = ref({});
 
 //根据商品分类查询所属商品
-const selectGoodsByGoodsTypeId = (goodsTypeId)=>{
-    axios.post('selectGoodsByGoodsTypeId',{
-        goodsTypeId: goodsTypeId
+// 根据商品分类查询所属商品
+const selectGoodsByGoodsTypeId = (goodsTypeId) => {
+  axios.get('selectGoodsByGoodsTypeId', {
+    params: {
+      goodsTypeId: goodsTypeId
+    }
+  })
+    .then(response => {
+      goodsArr.value = response.data;
     })
-      .then(response=>{
-        goodsArr.value = response.data;
-      })
-      .catch(error=>{
-        console.log(error);
-      });
+    .catch(error => {
+      console.log(error);
+    });
 }
 
-//初始化
-const init = ()=>{
-    axios.post('selectGoodsTypeAll')
-      .then(response=>{
-        goodsTypeArr.value = response.data;
-        goodsType.value = goodsTypeArr.value[0];
-        selectGoodsByGoodsTypeId(goodsType.value.goodsTypeId);
-      })
-      .catch(error=>{
-        console.log(error);
-      });
+// 初始化
+const init = () => {
+  axios.get('selectGoodsTypeAll')
+    .then(response => {
+      goodsTypeArr.value = response.data;
+      goodsType.value = goodsTypeArr.value[0];
+      selectGoodsByGoodsTypeId(goodsType.value.goodsTypeId);
+    })
+    .catch(error => {
+      console.log(error);
+    });
 }
 init();
+
 
 const selectType = (index)=>{
   goodsType.value = goodsTypeArr.value[index];
@@ -93,22 +97,24 @@ const toGoods = (goodsId)=>{
 
 <style scoped>
 /************************* 商品分类导航特效样式 **************************/
-.nav-item-select{
-    font-weight: 700;
-    color: #333;
-    border-left: solid 3px #FF6700;
+.nav-item-select {
+  font-weight: 700;
+  color: #333;
+  border-left: solid 3px #FF6700;
 }
 
-.nav-item{
-    font-weight: 300;
-    color: #666;
-    border-left: none;
+.nav-item {
+  font-weight: 300;
+  color: #666;
+  border-left: none;
 }
 
 /************************* 总容器 **************************/
 .container {
   width: 100%;
   height: 100%;
+  position: relative; /* 添加相对定位 */
+  padding-bottom: 10vh; /* 添加底部内边距，确保内容不会被底部导航栏覆盖 */
 }
 
 /************************* header **************************/
@@ -116,11 +122,9 @@ header {
   width: 100%;
   height: 14vw;
   background-color: #fff;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   position: fixed;
   z-index: 100;
 }
@@ -142,33 +146,26 @@ header div i {
 
 /************************* section **************************/
 section {
-  width: 100%;
+  width: 14%;
+  position: relative; /* 添加相对定位 */
 }
 section .nav {
   width: 21vw;
   position: fixed;
   left: 0;
-  top: 14vw;
+  top: calc(14vw + 4.5vw + 5vh); /* 确保导航不会覆盖header，同时考虑到底部导航栏的高度 */
   z-index: 100;
-  margin-top: 4.5vw;
 }
 section .nav li {
   width: 100%;
-  height: 4vw;
-  margin-bottom: 9vw;
+  height: 1vw;
+  margin-bottom: 5vw;
   text-align: center;
-  line-height: 4vw;
+  line-height: 2vw;
   font-size: 3.3vw;
-  color: #666;
+  color: #888;
   user-select: none;
 }
-/*
-section .nav li:first-child{
-    font-weight: 700;
-    color: #333;
-    border-left: solid 3px #FF6700;
-}
-*/
 
 section aside {
   width: 70vw;
@@ -178,7 +175,7 @@ section aside {
 section aside .goods-list {
   width: 70vw;
   margin: 0 auto;
-  margin-top: 14vw;
+  margin-top: 14vw; /* 确保商品列表不会覆盖header */
 }
 section aside .goods-list > li {
   margin-bottom: 16vw;

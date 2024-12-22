@@ -104,8 +104,10 @@ const goodsTotalPrice = computed(()=>{
 //初始化
 const init = () => {
   axios
-    .post("selectCartByTelId", {
-      telId: customer.telId,
+    .get("selectCartByTelId", {
+      params: {
+        telId: customer.telId,
+      }
     })
     .then((response) => {
       cartArr.value = response.data;

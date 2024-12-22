@@ -69,8 +69,10 @@ let selectCartCountByTelId = () => {
 //初始化
 const init = () => {
   axios
-    .post("selectGoodsById", {
-      goodsId: route.query.goodsId,
+    .get("selectGoodsById", {
+      params: {
+        goodsId: route.query.goodsId,
+      }
     })
     .then((response) => {
       goods.value = response.data;
@@ -130,9 +132,11 @@ const addCart = () => {
     router.push("/login");
   } else {
     axios
-      .post("selectCartByTelIdByGoodsId", {
-        telId: customer.telId,
-        goodsId: route.query.goodsId,
+      .get("selectCartByTelIdByGoodsId", {
+        params: {
+          telId: customer.telId,
+          goodsId: route.query.goodsId,
+        }
       })
       .then((response) => {
         if (response.data >= 1) {
